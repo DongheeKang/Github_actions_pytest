@@ -1,4 +1,4 @@
-name: Tests
+name: pytest_example
 on: [push]
 
 jobs:
@@ -7,13 +7,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    
-    - uses: actions/checkout@v2
+    - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
+    - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+    - uses: actions/checkout@v3
 
     - name: Setup timezone
       uses: zcong1993/setup-timezone@master
       with:
-        timezone: UTC
+        timezone: Europe/Berlin
 
     - name: Set up Python 3.8
       uses: actions/setup-python@v2
@@ -32,3 +33,5 @@ jobs:
       run: |
         pytest --exitfirst --verbose --failed-first \
         --cov=. --cov-report html
+
+    - run: echo "🍏 This job's status is ${{ job.status }}."
